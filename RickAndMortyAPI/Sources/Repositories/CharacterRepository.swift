@@ -7,8 +7,9 @@
 
 import Foundation
 
-protocol CharacterRepositoryProtocol {
-    func fetchCharacters() async throws -> [Character]
+protocol CharacterRepository {
+    func getCharacters(page: Int) async throws -> [Character]
 }
+
 
 

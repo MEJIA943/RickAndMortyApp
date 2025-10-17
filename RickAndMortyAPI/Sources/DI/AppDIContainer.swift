@@ -8,8 +8,6 @@
 import Foundation
 import Swinject
 
-/// Contenedor de dependencias principal de la app.
-/// Se encarga de registrar todos los servicios, repositorios y view models.
 final class AppDIContainer {
     static let shared = AppDIContainer()
     let container = Container()
@@ -19,8 +17,17 @@ final class AppDIContainer {
     }
 
     private func registerDependencies() {
-        container.register(CharacterListViewModel.self) { _ in
-            CharacterListViewModel(repository: MockCharacterRepository())
+        container.register(CharacterRepository.self) { _ in
+            CharacterRepositoryImpl()
+        }
+
+        //Llamamos al inicializador dentro del MainActor
+        container.register(CharacterListViewModel.self) { resolver in
+            let repository = resolver.resolve(CharacterRepository.self)!
+            return MainActor.assumeIsolated {
+                CharacterListViewModel(repository: repository)
+            }
         }
     }
 }
+

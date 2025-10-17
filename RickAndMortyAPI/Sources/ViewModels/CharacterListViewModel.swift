@@ -6,40 +6,38 @@
 //
 
 import Foundation
-import Combine
 
-/// ViewModel principal para el listado de personajes.
+@MainActor //Asegura que las actualizaciones de UI se hagan en el hilo principal
 final class CharacterListViewModel: ObservableObject {
-    // MARK: - Propiedades publicadas
+
+    // MARK: - Propiedades observables
     @Published var characters: [Character] = []
-    @Published var isLoading = false
+    @Published var isLoading: Bool = false
     @Published var errorMessage: String?
 
-    private let repository: CharacterRepositoryProtocol
-    private var cancellables = Set<AnyCancellable>()
+    private let repository: CharacterRepository
 
     // MARK: - Inicializador
-    init(repository: CharacterRepositoryProtocol) {
+    init(repository: CharacterRepository = CharacterRepositoryImpl()) {
         self.repository = repository
-        loadCharacters()
     }
 
-    // MARK: - Métodos
-    func loadCharacters() {
+    // MARK: - Lógica principal
+    func fetchCharacters() async {
         isLoading = true
-        Task {
-            do {
-                let result = try await repository.fetchCharacters()
-                DispatchQueue.main.async {
-                    self.characters = result
-                    self.isLoading = false
-                }
-            } catch {
-                DispatchQueue.main.async {
-                    self.errorMessage = "Error al cargar personajes"
-                    self.isLoading = false
-                }
-            }
+        errorMessage = nil
+
+        do {
+            // Llamada al repositorio para obtener los personajes
+            let fetchedCharacters = try await repository.getCharacters(page: 1)
+            self.characters = fetchedCharacters
+        } catch {
+            // Si ocurre un error (red, decodificación, etc.)
+            self.errorMessage = "No se pudieron cargar los personajes"
+            print("Error fetching characters: \(error.localizedDescription)")
         }
+
+        isLoading = false
     }
 }
+

@@ -8,23 +8,55 @@
 import SwiftUI
 
 struct CharacterListView: View {
-    @ObservedObject var viewModel: CharacterListViewModel
+    @StateObject private var viewModel = CharacterListViewModel()
 
     var body: some View {
-        NavigationStack {
-            VStack {
-                Text("Rick and Morty API App")
-                    .font(.title)
-                    .padding()
+        NavigationView {
+            Group {
+                if viewModel.isLoading {
+                    ProgressView("Cargando personajes...")
+                } else if let errorMessage = viewModel.errorMessage {
+                    VStack {
+                        Text(errorMessage)
+                            .foregroundColor(.red)
+                            .padding()
+                        Button("Reintentar") {
+                            Task { await viewModel.fetchCharacters() }
+                        }
+                        .buttonStyle(.borderedProminent)
+                    }
+                } else {
+                    //Lista de personajes
+                    List(viewModel.characters, id: \.id) { character in
+                        NavigationLink(destination: CharacterDetailView(character: character)) {
+                            HStack {
+                                AsyncImage(url: URL(string: character.image)) { image in
+                                    image.resizable()
+                                } placeholder: {
+                                    ProgressView()
+                                }
+                                .frame(width: 60, height: 60)
+                                .clipShape(Circle())
 
-                Text("Aquí irá la lista de personajes")
-                    .foregroundStyle(.secondary)
+                                VStack(alignment: .leading) {
+                                    Text(character.name)
+                                        .font(.headline)
+                                    Text(character.species)
+                                        .font(.subheadline)
+                                        .foregroundColor(.secondary)
+                                }
+                            }
+                        }
+                    }
+                    .listStyle(.plain)
+                }
             }
             .navigationTitle("Personajes")
+            .task {
+                //Llamamos al ViewModel cuando la vista aparece
+                await viewModel.fetchCharacters()
+            }
         }
     }
 }
 
-#Preview {
-    CharacterListView(viewModel: CharacterListViewModel(repository: MockCharacterRepository()))
-}

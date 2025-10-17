@@ -33,6 +33,25 @@
 		20DFD8122EA20ED9001A9223 /* RickAndMortyAPIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RickAndMortyAPIUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		20DFD8722EA235C9001A9223 /* Exceptions for "RickAndMortyAPITests" folder in "RickAndMortyAPITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				RickAndMortyAPIUITests/RickAndMortyAPIUITests.swift,
+				RickAndMortyAPIUITests/RickAndMortyAPIUITestsLaunchTests.swift,
+			);
+			target = 20DFD8072EA20ED9001A9223 /* RickAndMortyAPITests */;
+		};
+		20DFD8732EA235C9001A9223 /* Exceptions for "RickAndMortyAPITests" folder in "RickAndMortyAPIUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				RickAndMortyAPIUITests/RickAndMortyAPIUITests.swift,
+				RickAndMortyAPIUITests/RickAndMortyAPIUITestsLaunchTests.swift,
+			);
+			target = 20DFD8112EA20ED9001A9223 /* RickAndMortyAPIUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		20DFD7FA2EA20ED7001A9223 /* RickAndMortyAPI */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -41,12 +60,11 @@
 		};
 		20DFD80B2EA20ED9001A9223 /* RickAndMortyAPITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				20DFD8722EA235C9001A9223 /* Exceptions for "RickAndMortyAPITests" folder in "RickAndMortyAPITests" target */,
+				20DFD8732EA235C9001A9223 /* Exceptions for "RickAndMortyAPITests" folder in "RickAndMortyAPIUITests" target */,
+			);
 			path = RickAndMortyAPITests;
-			sourceTree = "<group>";
-		};
-		20DFD8152EA20ED9001A9223 /* RickAndMortyAPIUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = RickAndMortyAPIUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -82,7 +100,6 @@
 			children = (
 				20DFD7FA2EA20ED7001A9223 /* RickAndMortyAPI */,
 				20DFD80B2EA20ED9001A9223 /* RickAndMortyAPITests */,
-				20DFD8152EA20ED9001A9223 /* RickAndMortyAPIUITests */,
 				20DFD7F92EA20ED7001A9223 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -158,9 +175,6 @@
 			);
 			dependencies = (
 				20DFD8142EA20ED9001A9223 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				20DFD8152EA20ED9001A9223 /* RickAndMortyAPIUITests */,
 			);
 			name = RickAndMortyAPIUITests;
 			packageProductDependencies = (
