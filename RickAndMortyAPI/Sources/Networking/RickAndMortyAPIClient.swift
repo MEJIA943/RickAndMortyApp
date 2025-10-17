@@ -18,10 +18,9 @@ final class RickAndMortyAPIClient {
 
     // MARK: - Characters
 
-    func fetchCharacters(page: Int = 1) async throws -> [Character] {
+    func fetchCharacters(page: Int = 1) async throws -> CharacterResponse {
         let endpoint = APIEndpoints.characters(page: page)
         let response: CharacterResponse = try await httpClient.request(endpoint)
-        return response.results
-    }
+        return response    }
 }
 

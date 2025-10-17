@@ -8,7 +8,9 @@
 import Foundation
 
 protocol CharacterRepository {
-    func getCharacters(page: Int) async throws -> [Character]
+    /// Obtiene la lista de personajes paginada
+    /// - Parameter page: número de página a consultar
+    func getCharacters(page: Int) async throws -> CharacterResponse
 }
 
 

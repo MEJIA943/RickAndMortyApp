@@ -14,8 +14,8 @@ final class CharacterRepositoryImpl: CharacterRepository {
         self.apiClient = apiClient
     }
 
-    func getCharacters(page: Int = 1) async throws -> [Character] {
-        try await apiClient.fetchCharacters(page: page)
+    func getCharacters(page: Int) async throws -> CharacterResponse {
+        return try await apiClient.fetchCharacters(page: page)
     }
 }
 
