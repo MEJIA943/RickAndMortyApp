@@ -6,12 +6,18 @@
 //
 
 import SwiftUI
+import Swinject
 
 @main
 struct RickAndMortyAPIApp: App {
+    
+    private let container = AppDIContainer.shared.container
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CharacterListView(
+                            viewModel: container.resolve(CharacterListViewModel.self)!
+                        )
         }
     }
 }
