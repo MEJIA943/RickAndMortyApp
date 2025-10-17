@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		20DFD8662EA22D89001A9223 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 20DFD8652EA22D89001A9223 /* Swinject */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		20DFD8092EA20ED9001A9223 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20DFD8662EA22D89001A9223 /* Swinject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +117,7 @@
 			);
 			name = RickAndMortyAPI;
 			packageProductDependencies = (
+				20DFD8652EA22D89001A9223 /* Swinject */,
 			);
 			productName = RickAndMortyAPI;
 			productReference = 20DFD7F82EA20ED7001A9223 /* RickAndMortyAPI.app */;
@@ -572,6 +578,14 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		20DFD8652EA22D89001A9223 /* Swinject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 20DFD8252EA2208E001A9223 /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = Swinject;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 20DFD7F02EA20ED7001A9223 /* Project object */;
 }
